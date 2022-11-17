@@ -1,7 +1,7 @@
-# Measuring_Augmentation_Effects_with_Central_Kernel_Alignment
+# Measuring Augmentation Effects with Central Kernel Alignment
 
 
-# Experiment Description
+### Experiment Description
 
 In this experiment, 
 we demonstrate that there is no trivial affects on CNN representations 
@@ -9,11 +9,16 @@ with noise data augmentation. The authors measure the CNN feature similarity wit
 Central Kernel Alignment. 
 
 
-# Menu Script
+### Menu Script
 
 ```bash 
 # first train cnn models with CIFAR10 dataset
 python train.py 
 
-# run jupyter notebook
+# run jupyter notebook cka.iypnb
 ```
+
+
+### Contact / Credits 
+
+* bumjin@kaist.ac.kr 
