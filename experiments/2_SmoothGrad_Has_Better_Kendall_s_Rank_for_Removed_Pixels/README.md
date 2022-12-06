@@ -1,6 +1,7 @@
-# SmoothGrad_Has_Better_Kendall_s_Rank_for_Removed_Pixels
+# SmoothGrad has Better Kendall's Rank for Removed Pixels
 
 
+🔖 Check out the result in [paper](assets/paper.pdf)
 
 
 ### Experiment Description
@@ -13,9 +14,7 @@ strictly linear correlation only for the Integrated Gradient. However, other inp
 In addition, we propose attribution score based input masking for the input deviation for the alternative of input perturbation. 
 We empircially show that masking based deviation has strictly positive correlation for SmoothGrad while IG fails. 
 
-<img src="assets/fig.png" width=800px>
-
-🔖 Check out the result in [paper](assets/paper.pdf)
+<img src="assets/fig.png" width=1000px>
 
 
 ### Menu Script
