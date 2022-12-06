@@ -6,9 +6,7 @@
 
 ### Experiment Description
 
-In this experiment, 
-
-we demonstrate that the Kendall's rank correlation on input attributions and cosine similarity has 
+In this experiment, we demonstrate that the Kendall's rank correlation on input attributions and cosine similarity has 
 strictly linear correlation only for the Integrated Gradient. However, other input attribution methods (LRP and SmoothGrad) also exhibits positive correlation. 
 
 In addition, we propose attribution score based input masking for the input deviation for the alternative of input perturbation. 
