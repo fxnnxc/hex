@@ -7,7 +7,6 @@ def store_hook_result(arrays, save_name):
     arrays = np.stack(arrays)  # Layers x Channel x H x W 
     with open(save_name+'.pkl', 'wb') as f:
         pickle.dump(arrays, f)
-    
 
 # ----
 # Model 
@@ -76,7 +75,7 @@ preprocess = transforms.Compose([
                             transforms.ToTensor(),
                             transforms.Normalize(mean=mean, std=std),    
                         ])
-wrapper = ResNetHookHelper(model, flags.target_layer, flags.num_channels, flags.num_flat_samples)
+wrapper = ResNetHookHelper(model, flags.target_layer, flags.num_channels)
 
 path = flags.data_root 
 testset = torchvision.datasets.ImageNet(root=path, split='val')
@@ -90,6 +89,7 @@ if not os.path.exists(save_path):
     # os.makedirs(os.path.join(save_path, 'fw_out'))
     os.makedirs(os.path.join(save_path, 'bw_in'))
     os.makedirs(os.path.join(save_path, 'bw_out'))
+    os.makedirs(os.path.join(save_path, 'bw_em'))
 
 from torch.autograd import Variable 
 
@@ -116,6 +116,7 @@ for index in tqdm(range(len(testset))):
         # store_hook_result(wrapper.fw_out_holder, os.path.join(save_path, 'fw_out', f'{flags.target_layer}'))
         store_hook_result(wrapper.bw_in_holder,  os.path.join(save_path, 'bw_in',  f'{flags.target_layer}_{index}'))
         store_hook_result(wrapper.bw_out_holder, os.path.join(save_path, 'bw_out', f'{flags.target_layer}_{index}'))
+        store_hook_result(wrapper.emission_holder, os.path.join(save_path, 'bw_em', f'{flags.target_layer}_{index}'))
         wrapper.clear_holder()
 
 # ---save 

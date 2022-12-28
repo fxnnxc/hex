@@ -1,10 +1,8 @@
 echo '👉 Running layer specific result for all samples.  The channels are randomly selected (fixed)'  
-# 
 
-
-# ~151
-encoder='resnet152'
-for target_layer in 0 20 50 75 98 100 125 150 # 8
+# # ~ 34
+encoder='resnet34'
+for target_layer in 0 1 15 25 30 # 8
 do 
 num_channels=50
 num_flat_samples=200

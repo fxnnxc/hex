@@ -3,7 +3,7 @@ import torch
 import torch.nn.functional as F
 import numpy as np 
 
-def build_backward_conv2d_hook(channels, in_holder, out_holder, num_flat_samples):
+def build_backward_conv2d_hook(channels, in_holder, out_holder, emission_holder):
     def backward_conv2d_hook(module, grad_inputs, grad_outputs):
         weight, bias = module.weight, module.bias
         # ---
@@ -11,15 +11,29 @@ def build_backward_conv2d_hook(channels, in_holder, out_holder, num_flat_samples
         new_grad_inputs = torch.nn.grad.conv2d_input(grad_inputs[0].shape, new_weight, grad_outputs[0],
                             stride=module.stride, padding=module.padding, dilation=module.dilation, groups=module.groups)
 
-        grads_in = grad_inputs[0][0][:15] # do it for the first 15 channels
+        # emission 
+        weight_temp = weight.clone()
+        ems = []
+        MAX_SAMPLES = 15
+        for k in range(min(weight_temp.size(0), MAX_SAMPLES)):
+            channel_weight = weight_temp[k,...].unsqueeze(0).clone()
+            channel_grads = grad_outputs[0][:,k,...].unsqueeze(1).clone()
+            emitted_grads = torch.nn.grad.conv2d_input(grad_inputs[0].shape, channel_weight, channel_grads,
+                            stride=module.stride, padding=module.padding, dilation=module.dilation, groups=module.groups)
+            em = emitted_grads.norm()
+            # print(emitted_grads.size())
+            ems.append(em.item())
+            
+        grads_in = grad_inputs[0][0][:MAX_SAMPLES] # do it for the first 15 channels
         grads_in = grads_in.reshape(grads_in.size(0), -1).norm(dim=-1)
 
-        grads_out = grad_outputs[0][0][:15] # do it for the first 15 channels
+        grads_out = grad_outputs[0][0][:MAX_SAMPLES] # do it for the first 15 channels
         grads_out = grads_out.reshape(grads_out.size(0), -1).norm(dim=-1)
 
         in_holder.append(grads_in.cpu().numpy())
         out_holder.append(grads_out.cpu().numpy())
-
+        emission_holder.append(np.array(ems))
+        
         # out_holder.append(grad_outputs[0].cpu())
         return [new_grad_inputs]
     return backward_conv2d_hook
@@ -32,7 +46,7 @@ def build_forward_hook(in_holder, out_holder):
     return forward_hook
 
 class ResNetHookHelper():
-    def __init__ (self, model, target_layer, num_channels, num_flat_samples):
+    def __init__ (self, model, target_layer, num_channels):
         self.model = model
         # self.fw_hooks = [] 
         self.bw_hooks = [] 
@@ -40,13 +54,13 @@ class ResNetHookHelper():
         # self.fw_in_holder = []
         # self.fw_out_holder = []
         
+        self.emission_holder = []
         self.bw_in_holder = []
         self.bw_out_holder = []
         
         self.num_channels = num_channels
         self.num_layers = self.compute_number_of_hook_layers()
         self.target_layer = target_layer
-        self.num_flat_samples = num_flat_samples
         
         
         print(f"👉 total layers: {self.num_layers} : your choice :{target_layer}")
@@ -73,7 +87,7 @@ class ResNetHookHelper():
             # self.fw_hooks.append(self.model.conv1.register_forward_hook(build_forward_hook(self.fw_in_holder, self.fw_out_holder)))
             self.num_target_layer_channel = self.model.conv1.weight.size(1)
             self.compute_channel_indices()
-            self.bw_hooks.append(self.model.conv1.register_full_backward_hook(build_backward_conv2d_hook(self.random_indices, self.bw_in_holder, self.bw_out_holder, self.num_flat_samples)))
+            self.bw_hooks.append(self.model.conv1.register_full_backward_hook(build_backward_conv2d_hook(self.random_indices, self.bw_in_holder, self.bw_out_holder, self.emission_holder)))
             return 
         
         for layer in [self.model.layer1, self.model.layer2, self.model.layer3, self.model.layer4]:        
@@ -85,7 +99,7 @@ class ResNetHookHelper():
                             self.num_target_layer_channel = getattr(basic_block, name).weight.size(1)
                             self.compute_channel_indices()  
                             # self.fw_hooks.append(getattr(basic_block, name).register_forward_hook(build_forward_hook(self.fw_in_holder, self.fw_out_holder)))
-                            self.bw_hooks.append(getattr(basic_block, name).register_full_backward_hook(build_backward_conv2d_hook(self.random_indices, self.bw_in_holder, self.bw_out_holder, self.num_flat_samples)))
+                            self.bw_hooks.append(getattr(basic_block, name).register_full_backward_hook(build_backward_conv2d_hook(self.random_indices, self.bw_in_holder, self.bw_out_holder, self.emission_holder)))
                             return 
                         
     def _remove_hook(self):
@@ -99,6 +113,7 @@ class ResNetHookHelper():
         # self.fw_out_holder.clear()
         self.bw_in_holder.clear()
         self.bw_out_holder.clear()
+        self.emission_holder.clear()
     
     def forward(self, x):    
         output = self.model(x)

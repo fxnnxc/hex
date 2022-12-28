@@ -2,7 +2,7 @@
 🔖 Check out the result in [paper](assets/paper.pdf)
 
 
-# Distribution Analysis - initialization test
+# 1. Distribution Analysis - initialization test
 
 
 Goal : Visualize the distribtuion of features for CNN and gradients in the convolution layers. 
@@ -20,7 +20,20 @@ Features
     See [model.py](src/model.py) for model descript
 
 
-# Reproduce the results 
+---
+
+We give the weight distribtuion before and after training for various initialization schemes
+<img src="weight.png" width=700px>
+
+
+---
+
+We also give the feature distribtuion before and after training for various initialization schemes and input types
+<img src="feature.png" width=700px>
+
+
+
+### Reproduce the results 
 
 ```bash 
 # step 1
@@ -35,7 +48,25 @@ Run the notebook
 ```
 
 
-# Channel statistics 
+# 2. Channel statistics 
+
+Gradient is the tool to analyze the behavior of a model. 
+
+We define two types of gradient statistics for a channel 
+
+* *Absoprtion* : How much gradient comes to the channel?
+* *Emission* : How much gradient goes out from the channel?
+
+---
+
+We give the *Ab* and *Em* of ResNet models  pretrained on ImageNet1K
+
+<img src="ab_em.png" width=700px>
+
+
+### Reproduce the results 
+
+
 
 ```bash
 cd channel_gradients 
