@@ -6,7 +6,7 @@ Habitual Experiment
 
 ### Feature Explanation
 
-[[2022.12.27]](experiments/3_distributions_in_deep_neural_networks/) 1) weight initialization distributions and 2) gradient distributions
+[[2022.12.27]](experiments/3_distributions_in_deep_neural_networks/) Distributions in Deep Neural Networks
 
 [[2022.12.07]](experiments/2_SmoothGrad_Has_Better_Kendall_s_Rank_for_Removed_Pixels) SmoothGrad Has Better Kendall's Rank for Removed Pixels
 

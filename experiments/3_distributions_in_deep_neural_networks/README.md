@@ -3,6 +3,11 @@
 
 ---
 
+## Abstract 
+
+The deep neural network is intractable to be analyzed as the number of parameters is huge and the training dynamics are stochastic. Despite the existence of difficulty, it is necessary to analyze the internal representation space for the debugging of models.  In this work, we present the empirical results in distribution shifts of parameters and features of deep neural networks with several weight initialization methods. As the result we found that the mean of parameters is almost centered at zero while the variance increased for all layers after the training. In the case of features, they had higher variance for  deeper layer compared to lower layers. In addition we analyze the gradients on the convolution features with mathematical formulation and present two statistics: emission and absorption of gradients for a single channel. The empirical result show that each channel has different variance of emission and absorption even in the same layer. 
+
+
 # 1. Distribution Analysis - initialization test
 
 
@@ -79,3 +84,10 @@ Run the notebook
 
 ```
 
+
+
+
+
+### Contact / Credits 
+
+* bumjin@kaist.ac.kr 
