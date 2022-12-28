@@ -23,13 +23,13 @@ Features
 ---
 
 We give the weight distribtuion before and after training for various initialization schemes
-<img src="weight.png" width=700px>
+<img src="weight.png">
 
 
 ---
 
 We also give the feature distribtuion before and after training for various initialization schemes and input types
-<img src="feature.png" width=700px>
+<img src="feature.png">
 
 
 
@@ -61,7 +61,7 @@ We define two types of gradient statistics for a channel
 
 We give the *Ab* and *Em* of ResNet models  pretrained on ImageNet1K
 
-<img src="ab_em.png" width=700px>
+<img src="ab_em.png" >
 
 
 ### Reproduce the results 
