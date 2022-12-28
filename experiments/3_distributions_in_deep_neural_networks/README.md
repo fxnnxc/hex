@@ -1,5 +1,5 @@
 
-# 🔖 Check out the result in format [paper](assets/paper.pdf)
+# 🔖 Check out the result in format [paper](paper.pdf)
 
 ---
 
