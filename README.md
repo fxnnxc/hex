@@ -1,17 +1,18 @@
-<center>
+# HEX 🦖
+
+<p align="center">
 <img src="giphy.gif"> 
+</p>
+<p align="center">
+<strong>Little Drops of Water Make the Mighty Ocean </strong>
+<a href="https://media.giphy.com/media/RCtKcMeeIlIFskmH7C/giphy.gif"> (Image Credit)</a>
+</p>
 
-Little drops of water make the mighty ocean
 
-Image Credit : [Giphy](https://media.giphy.com/media/RCtKcMeeIlIFskmH7C/giphy.gif)
-
-</center>
 
 ---
 
-# HEX 🦖
-
-This is a repository for researchers who conduct **Habitual Experiments** for their own sceintific findings.
+A repository for researchers who conduct **Habitual Experiments** for their own sceintific findings.
 
 ### Contributed Members 
 
