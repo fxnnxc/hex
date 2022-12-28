@@ -1,8 +1,26 @@
+<center>
+<img src="giphy.gif"> 
+
+Little drops of water make the mighty ocean
+
+Image Credit : [Giphy](https://media.giphy.com/media/RCtKcMeeIlIFskmH7C/giphy.gif)
+
+</center>
+
+---
+
 # HEX 🦖
 
-Habitual Experiment 
+This is a repository for researchers who conduct **Habitual Experiments** for their own sceintific findings.
 
-# List of experiments 🧪
+### Contributed Members 
+
+* 🎖 Bumjin Park
+* 🎖 CheongWoong Kang
+
+
+
+### Experiments 🧪
 
 
 * [[2022.12.27]](experiments/3_distributions_in_deep_neural_networks/) 🧪 Distributions in Deep Neural Networks
