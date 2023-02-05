@@ -24,6 +24,7 @@ A repository for researchers who conduct **Habitual Experiments** for their own 
 ### Experiments 🧪
 
 
+* [[2023.02.05]](experiments/5_finding_similar_classes/) 🧪 Finding Similar Labels with Internal Representations in Image Classification
 * [[2022.12.27]](experiments/3_distributions_in_deep_neural_networks/) 🧪 Distributions in Deep Neural Networks
 * [[2022.12.26]](experiments/4_attention_intervention_for_syntactic_knowledge/) 🧪 Attention Intervention for Syntactic Knowledge
 * [[2022.12.07]](experiments/2_SmoothGrad_Has_Better_Kendall_s_Rank_for_Removed_Pixels) 🧪 SmoothGrad Has Better Kendall's Rank for Removed Pixels
